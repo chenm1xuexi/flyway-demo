@@ -1,0 +1,37 @@
+server:
+  port: 8888
+
+schema:
+  name: flyway-test
+
+spring:
+  application:
+    name: flyway-test
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/${schema.name}?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+  flyway:
+    # 是否开启flyway
+    enabled: true
+    # 指定版本控制信息表的表名
+    table: flyway_schema_history
+    # flyway 的 clean 命令会删除指定 schema 下的所有 table, 生产务必禁掉。这个默认值是 false 理论上作为默认配置是不科学的。
+    clean-disabled: true
+    # 指定存放sql脚本的路径地址
+    locations: classpath:db/migration
+    # 如果不想生成flyway_schema_history这个表，则将该项设置为true
+    baseline-on-migrate: false
+    # 每次执行前都需要指定当前版本号, 则服务启动时过滤小于或等于当前版本的sql文件
+    # baseline-version: 1
+    # 设置字符编码
+    encoding: UTF-8
+    # 是否允许不按顺序迁移 开发建议 true  生产建议 false，这里统一采用顺序迁移
+    out-of-order: false
+    # 指定交由flyway管控的数据库名，这里可配置多个数据库, 我们这里使用的数据库为flyway-test
+    schemas: ${schema.name}
+    # 在执行前移时开启自动校验，如果出错则自动报错且回滚
+    validate-on-migrate: true
+
+
