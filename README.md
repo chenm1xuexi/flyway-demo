@@ -1,6 +1,12 @@
 # flyway-demo
 主要用于记录flyway + springboot整合使用
 
+针对springboot的版本和flyway的版本建议如下：
+```
+springboot2.0.x  推荐使用flyway5.2.4的版本（如果强制采用6.0版本及以上会出现文件无法找到的错误）
+springboot2.1.x ~ 最新版本 推荐使用flyway6.2.4的版本
+```
+
 ### 这是一个使用flyway的小demo,让大家快速的熟悉起来对flyway的使用
 
 flyway的具体相关配置请查看application.yml文件中的注释

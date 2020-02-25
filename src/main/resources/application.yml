@@ -8,7 +8,7 @@ spring:
   application:
     name: flyway-test
   datasource:
-    
+
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/${schema.name}?characterEncoding=utf-8&useSSL=false
     username: root
@@ -39,5 +39,3 @@ spring:
     schemas: ${schema.name}
     # 在执行前移时开启自动校验，如果出错则自动报错且回滚
     validate-on-migrate: true
-
-
