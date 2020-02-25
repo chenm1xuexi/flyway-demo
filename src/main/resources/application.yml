@@ -8,6 +8,7 @@ spring:
   application:
     name: flyway-test
   datasource:
+    
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/${schema.name}?characterEncoding=utf-8&useSSL=false
     username: root
@@ -21,7 +22,12 @@ spring:
     clean-disabled: true
     # 指定存放sql脚本的路径地址
     locations: classpath:db/migration
-    # 如果不想生成flyway_schema_history这个表，则将该项设置为true
+    # 在针对没有模式历史记录表的非空模式执行迁移时是否自动调用基线。
+    # 然后，在执行迁移之前，将使用baselineVersion初始化此架构。
+    # 仅适用于基线版本以上的迁移。
+    # 这对于具有现有数据库的项目上的初始Flyway生产部署很有用。
+    # 启用此功能时要小心，因为它会消除确保
+    # 如果配置错误，Flyway不会迁移错误的数据库！（默认值：false）
     baseline-on-migrate: false
     # 每次执行前都需要指定当前版本号, 则服务启动时过滤小于或等于当前版本的sql文件
     # baseline-version: 1

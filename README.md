@@ -29,3 +29,21 @@ Prefix + Version + Separator + Description + Suffix
  服务的每次启动都会记录该次的最新的版本号，下次启动时会自动配对版本号是否有所更新
  ，更新则执行最新的数据迁移文件。
 
+
+
+如果使用的是druid的数据源，我们需要将其的一些wallConfig进行关闭或者开启
+
+这里只演示针对mybatis的动态数据源的配置，其中druid作为动态数据源中的其中一个，
+我们需要开启一下配置才能联合flyway一起使用
+具体解决方案在druid的gihub issue中有所提及，链接如下：
+https://github.com/alibaba/druid/issues/1594
+```
+# 不进行检测是否使用了“禁用的变量”
+spring.datasource.dynamic.druid.wall.variant-check = false
+# 允许非以上基本语句的其他语句，通过此可以开启DDL
+spring.datasource.dynamic.druid.wall.none-base-statement-allow = true
+# 允许sql语句中添加注释，以能够对flyway的初始化sql放行
+spring.datasource.dynamic.druid.wall.comment-allow = true
+# 允许一次执行多条语句，缺省关闭
+spring.datasource.dynamic.druid.wall.multi-statement-allow = true
+```
