@@ -56,3 +56,9 @@ spring.datasource.dynamic.druid.wall.comment-allow = true
 # 允许一次执行多条语句，缺省关闭
 spring.datasource.dynamic.druid.wall.multi-statement-allow = true
 ```
+
+线上部署的时候，发现flyway版本大于5.2.1的时候，会出现SELECT command denied to user 'xxx'@'xxx.xx.xx.xxx' for table 'user_variables_by_thread'异常，其缘由就是访问user_variables_by_thread没有；
+解决方案1. 给mysql用户赋予读写权限。
+解决方案2. 降低flyway的版本为5.2.1及以下。
+版本
+
